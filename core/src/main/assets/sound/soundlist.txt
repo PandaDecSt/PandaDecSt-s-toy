@@ -1,0 +1,10 @@
+soundscape tense C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\Detunized - WindTurbines\Detunized_WindTurbines_LatticeTower_03.wav
+soundscape C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\Giorgio Riolo - SILENTSCAPES\SFXW001_indoor_train_trip_passenger coach.wav
+silent soundscape C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\Giorgio Riolo - SILENTSCAPES\SFXW001_indoor_basement neutral sound.wav
+fizz C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\Eiravaein Works - Ilmarinen\Ilmarinen,blacksmith,forge,hotiron,water,squelch,sizzle,rough,popping.M.wav
+menu select C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\Eiravaein Works - Start Select\StartSelect,UI,set3,pure,warm,simple,quick,tonal,deaction.wav
+shell crack C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\Mattia Cellotto - Crunch Mode\Bell,Pepper,Crunch,Crack,Break02.wav
+lots of slime/splat C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\Mattia Cellotto - The Borax Experiment\
+spooky enemy sounds C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\Mechanical Wave - Sci-Fi-Invaders\
+weapon config C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\SoundMorph - Future Weapons\Utilities-Mine or System activation-13.wav
+enemy squeak/scream C:\Dev\Game\Sound\Sonniss.com - GDC - Game Audio Bundle\TheLibrarybyEmptySea - SeaMonsters 2\TheLibrarybyMTC_ScreechMonster_Roar_34_96k.wav

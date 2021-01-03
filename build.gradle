@@ -1,0 +1,34 @@
+
+buildscript {
+    repositories {
+		mavenLocal()
+        mavenCentral()
+        jcenter()
+        google()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    }
+    dependencies {
+classpath "com.android.tools.build:gradle:4.1.0-alpha04"
+    }
+}
+
+allprojects {
+	version = '1.0'
+    ext {
+        versionCode = 59
+        appName = 'PandaDecSt_s toy'
+        appTitle = 'PandaDecSt_s toy'
+        appId = 'com.pandadecst.toy'
+        gdxVersion = '1.9.13'
+        roboVMVersion = '0.0.14'
+    }
+    repositories {
+		mavenLocal()
+        mavenCentral()
+        jcenter()
+        google()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+	}
+}
