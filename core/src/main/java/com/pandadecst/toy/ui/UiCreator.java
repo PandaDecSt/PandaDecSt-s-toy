@@ -48,6 +48,10 @@ public class UiCreator {
 
 //      stage.addActor(new TestMultiSplitPane());       
     }
+    
+    public static void createNewObj(Stage stage, Actor obj){
+        stage.addActor(obj);
+    }
 
     private static void createMenus(final Stage stage, MenuBar menuBar) {
 

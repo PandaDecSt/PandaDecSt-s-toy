@@ -23,6 +23,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
@@ -30,6 +31,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
 import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
@@ -51,6 +53,7 @@ import com.pandadecst.toy.ui.UiCreator;
 import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 import com.pandadecst.toy.world.SkyBox;
+import com.pandadecst.toy.ui.ObjectController;
 
 /** @author xoppa */
 public class BaseBulletTest extends BulletTest {
@@ -64,6 +67,8 @@ public class BaseBulletTest extends BulletTest {
     public Stage uistage = new Stage(new ScreenViewport());
 
     public InputMultiplexer inputMultiplexer;
+    
+    public ObjectController objController = new ObjectController();
 
 	public static void init() {
 		if (initialized) return;
@@ -142,8 +147,11 @@ public class BaseBulletTest extends BulletTest {
 			new Material(ColorAttribute.createDiffuse(Color.WHITE), ColorAttribute.createSpecular(Color.WHITE), FloatAttribute
                          .createShininess(16f)), Usage.Position | Usage.Normal);
 		disposables.add(groundModel);
-		final Model boxModel = modelBuilder.createBox(1f, 1f, 1f, new Material(ColorAttribute.createDiffuse(Color.WHITE),
-                                                                               ColorAttribute.createSpecular(Color.WHITE), FloatAttribute.createShininess(64f)), Usage.Position | Usage.Normal);
+        final Texture texture = new Texture(Gdx.files.internal("et/STONE.png"));
+        disposables.add(texture);
+        final Material material = new Material(TextureAttribute.createDiffuse(texture), ColorAttribute.createSpecular(1,1,1,1), FloatAttribute.createShininess(8f));
+		final long attributes = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
+		final Model boxModel = modelBuilder.createBox(1f, 1f, 1f, material, attributes);
 		disposables.add(boxModel);
 
 		// Add the constructors
@@ -152,6 +160,7 @@ public class BaseBulletTest extends BulletTest {
 		world.addConstructor("staticbox", new BulletConstructor(boxModel, 0f)); // mass = 0: static body
 
         UiCreator.createVisUi(uistage, inputMultiplexer);
+        UiCreator.createNewObj(uistage, objController);
 
         skybox = new SkyBox(camera);
         inputMultiplexer = new InputMultiplexer();

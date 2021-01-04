@@ -51,7 +51,7 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 	public final Vector3 gravity;
 
 	public int maxSubSteps = 5;
-	public float fixedTimeStep = 1f / 60f;
+	public float fixedTimeStep = 1f / 120f;
 
 	public BulletWorld (final btCollisionConfiguration collisionConfiguration, final btCollisionDispatcher dispatcher,
 		final btBroadphaseInterface broadphase, final btConstraintSolver solver, final btCollisionWorld world, final Vector3 gravity) {
@@ -80,7 +80,7 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 	}
 
 	public BulletWorld () {
-		this(new Vector3(0, -10, 0));
+		this(new Vector3(0, -10f, 0));
 	}
 
 	@Override
