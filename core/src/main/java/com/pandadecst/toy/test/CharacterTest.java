@@ -41,6 +41,8 @@ public class CharacterTest extends BaseBulletTest {
 
 	BulletEntity ground;
     Player player;
+    
+    btGhostPairCallback ghostPairCallback;
 
 	@Override
 	public BulletWorld createWorld() {
@@ -50,6 +52,8 @@ public class CharacterTest extends BaseBulletTest {
 		btAxisSweep3 sweep = new btAxisSweep3(new Vector3(-1000, -1000, -1000), new Vector3(1000, 1000, 1000));
 		btSequentialImpulseConstraintSolver solver = new btSequentialImpulseConstraintSolver();
 		btDiscreteDynamicsWorld collisionWorld = new btDiscreteDynamicsWorld(dispatcher, sweep, solver, collisionConfiguration);
+        ghostPairCallback = new btGhostPairCallback();
+		sweep.getOverlappingPairCache().setInternalGhostPairCallback(ghostPairCallback);
 		return new BulletWorld(collisionConfiguration, dispatcher, sweep, solver, collisionWorld);
 	}
 

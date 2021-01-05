@@ -21,6 +21,9 @@ import com.pandadecst.toy.physics.base.BaseBulletTest;
 import com.pandadecst.toy.ui.ObjectController;
 import com.badlogic.gdx.physics.bullet.collision.btGhostPairCallback;
 import com.badlogic.gdx.physics.bullet.collision.btAxisSweep3;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
 
 public class Player {
     BaseBulletTest bbt;
@@ -69,28 +72,27 @@ public class Player {
 		ghostObject.setCollisionShape(ghostShape);
 		ghostObject.setCollisionFlags(btCollisionObject.CollisionFlags.CF_CHARACTER_OBJECT);
 		(characterController = new btKinematicCharacterController(ghostObject, ghostShape, .35f, Vector3.Y)).setJumpSpeed(12);
-
-        /*
+        
          // Create a visual representation of the character (note that we don't use the physics part of BulletEntity, we'll do that manually)
-         final Texture texture = new Texture(Gdx.files.internal("data/badlogic.jpg"));
-         disposables.add(texture);
-         final Material material = new Material(TextureAttribute.createDiffuse(texture), ColorAttribute.createSpecular(1,1,1,1), FloatAttribute.createShininess(8f));
-         final long attributes = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
-         final Model capsule = modelBuilder.createCapsule(2f, 6f, 16, material, attributes);
-         disposables.add(capsule);
-         world.addConstructor("capsule", new BulletConstructor(capsule, null));
-         character = world.add("capsule", 5f, 3f, 5f);
-         characterTransform = character.transform; // Set by reference
-         characterTransform.rotate(Vector3.X, 90);
-
-         // Create the physics representation of the character
-         ghostObject = new btPairCachingGhostObject();
-         ghostObject.setWorldTransform(characterTransform);
-         ghostShape = new btCapsuleShape(2f, 2f);
-         ghostObject.setCollisionShape(ghostShape);
-         ghostObject.setCollisionFlags(btCollisionObject.CollisionFlags.CF_CHARACTER_OBJECT);
-         characterController = new btKinematicCharacterController(ghostObject, ghostShape, .35f, Vector3.Y);
-         */
+//         final Texture texture = new Texture(Gdx.files.internal("data/badlogic.jpg"));
+//         bbt.disposables.add(texture);
+//         final Material material = new Material(TextureAttribute.createDiffuse(texture), ColorAttribute.createSpecular(1,1,1,1), FloatAttribute.createShininess(8f));
+//         final long attributes = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
+//         final Model capsule = bbt.modelBuilder.createCapsule(2f, 6f, 16, material, attributes);
+//         bbt.disposables.add(capsule);
+//         bbt.world.addConstructor("capsule", new BulletConstructor(capsule, null));
+//         character = bbt.world.add("capsule", 5f, 3f, 5f);
+//         characterTransform = character.transform; // Set by reference
+//         characterTransform.rotate(Vector3.X, 90);
+//
+//         // Create the physics representation of the character
+//         ghostObject = new btPairCachingGhostObject();
+//         ghostObject.setWorldTransform(characterTransform);
+//         ghostShape = new btCapsuleShape(2f, 2f);
+//         ghostObject.setCollisionShape(ghostShape);
+//         ghostObject.setCollisionFlags(btCollisionObject.CollisionFlags.CF_CHARACTER_OBJECT);
+//         characterController = new btKinematicCharacterController(ghostObject, ghostShape, .35f, Vector3.Y);
+//         
 	}
 
 	public void update() {
@@ -120,7 +122,7 @@ public class Player {
 		if (Gdx.input.isKeyPressed(Keys.D) | objController.rightPressed)
 			walk(RIGHT);
 
-		walkDirection.scl((Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) ? 16.7f : 13.2f) * Gdx.graphics.getDeltaTime());
+        walkDirection.scl((Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) ? 16.7f : 13.2f) * Gdx.graphics.getDeltaTime());
 
 		characterController.setWalkDirection(walkDirection);
 
