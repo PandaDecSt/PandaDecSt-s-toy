@@ -104,7 +104,7 @@ public class BaseBulletTest extends BulletTest {
 		init();
 		environment = new Environment();
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.3f, 0.3f, 0.3f, 1.f));
-		light = shadows ? new DirectionalShadowLight(1024, 1024, 20f, 20f, 1f, 300f) : new DirectionalLight();
+		light = shadows ? new DirectionalShadowLight(1928, 1080, 20f, 20f, 1f, 3000f) : new DirectionalLight();
 		light.set(0.8f, 0.8f, 0.8f, -0.5f, -1f, 0.7f);
 		environment.add(light);
 		if (shadows)
