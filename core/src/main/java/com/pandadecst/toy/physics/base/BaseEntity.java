@@ -28,6 +28,7 @@ public abstract class BaseEntity implements Disposable {
 	public Matrix4 transform;
 	public ModelInstance modelInstance;
 	private Color color = new Color(1f, 1f, 1f, 1f);
+    public boolean invisible = false;
 
 	public Color getColor () {
 		return color;

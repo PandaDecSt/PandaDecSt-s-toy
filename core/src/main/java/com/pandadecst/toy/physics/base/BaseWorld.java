@@ -29,63 +29,64 @@ public class BaseWorld<T extends BaseEntity> implements Disposable {
 	public static abstract class Constructor<T extends BaseEntity> implements Disposable {
 		public Model model = null;
 
-		public abstract T construct (final float x, final float y, final float z);
+		public abstract T construct(final float x, final float y, final float z);
 
-		public abstract T construct (final Matrix4 transform);
+		public abstract T construct(final Matrix4 transform);
 	}
 
 	private final ObjectMap<String, Constructor<T>> constructors = new ObjectMap<String, Constructor<T>>();
 	protected final Array<T> entities = new Array<T>();
 	private final Array<Model> models = new Array<Model>();
 
-	public void addConstructor (final String name, final Constructor<T> constructor) {
+	public void addConstructor(final String name, final Constructor<T> constructor) {
 		constructors.put(name, constructor);
 		if (constructor.model != null && !models.contains(constructor.model, true)) models.add(constructor.model);
 	}
 
-	public Constructor<T> getConstructor (final String name) {
+	public Constructor<T> getConstructor(final String name) {
 		return constructors.get(name);
 	}
 
-	public void add (final T entity) {
+	public void add(final T entity) {
 		entities.add(entity);
 	}
 
-	public T add (final String type, float x, float y, float z) {
-        if(constructors.get(type) != null){
-		final T entity = constructors.get(type).construct(x, y, z);
-		add(entity);
-		return entity;}
+	public T add(final String type, float x, float y, float z) {
+        if (constructors.get(type) != null) {
+            final T entity = constructors.get(type).construct(x, y, z);
+            add(entity);
+            return entity;}
         return null;
 	}
 
-	public T add (final String type, final Matrix4 transform) {
-        if(constructors.get(type) != null){
+	public T add(final String type, final Matrix4 transform) {
+        if (constructors.get(type) != null) {
             final T entity = constructors.get(type).construct(transform);
             add(entity);
             return entity;}
         return null;
 	}
 
-	public void render (final ModelBatch batch, final Environment lights) {
+	public void render(final ModelBatch batch, final Environment lights) {
 		render(batch, lights, entities);
 	}
 
-	public void render (final ModelBatch batch, final Environment lights, final Iterable<T> entities) {
-		for (final T e : entities) {
-			batch.render(e.modelInstance, lights);
+	public void render(final ModelBatch batch, final Environment lights, final Iterable<T> entities) {
+        for (final T e : entities) {
+            if (!e.invisible)
+                batch.render(e.modelInstance, lights);
 		}
 	}
 
-	public void render (final ModelBatch batch, final Environment lights, final T entity) {
+	public void render(final ModelBatch batch, final Environment lights, final T entity) {
 		batch.render(entity.modelInstance, lights);
 	}
 
-	public void update () {
+	public void update() {
 	}
 
 	@Override
-	public void dispose () {
+	public void dispose() {
 		for (int i = 0; i < entities.size; i++)
 			entities.get(i).dispose();
 		entities.clear();
