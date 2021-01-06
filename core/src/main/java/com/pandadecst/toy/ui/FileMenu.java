@@ -10,10 +10,6 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
 
-/**
- * @author Marcus Brummer
- * @version 22-11-2015
- */
 public class FileMenu extends Menu {
 
     private MenuItem newProject;

@@ -3,16 +3,13 @@ package com.pandadecst.toy.ui;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 
-/**
- * @author Marcus Brummer
- * @version 22-11-2015
- */
 public class EditMenu extends Menu {
 
     private MenuItem copy;
     private MenuItem paste;
     private MenuItem undo;
     private MenuItem redo;
+    private MenuItem add;
 
     public EditMenu() {
         super("编辑");
@@ -21,11 +18,13 @@ public class EditMenu extends Menu {
         paste = new MenuItem("粘贴");
         undo = new MenuItem(" < ");
         redo = new MenuItem(" > ");
+        add = new MenuItem("添加");
 
         addItem(copy);
         addItem(paste);
         addItem(undo);
         addItem(redo);
+        addItem(add);
 
     }
 
@@ -43,5 +42,9 @@ public class EditMenu extends Menu {
 
     public MenuItem getUndo() {
         return undo;
+    }
+    
+    public MenuItem getAdd() {
+        return add;
     }
 }
