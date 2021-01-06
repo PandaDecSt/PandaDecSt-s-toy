@@ -24,6 +24,7 @@ import com.badlogic.gdx.physics.bullet.collision.btAxisSweep3;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
+import com.badlogic.gdx.physics.bullet.collision.btBoxShape;
 
 public class Player {
     BaseBulletTest bbt;
@@ -56,19 +57,27 @@ public class Player {
 //        ghostPairCallback = new btGhostPairCallback();
 //		sweep.getOverlappingPairCache().setInternalGhostPairCallback(ghostPairCallback);
 
-		final Material material = new Material(ColorAttribute.createDiffuse(Color.BLUE));
-		final long attributes = Usage.Position | Usage.Normal;
-		final Model capsule = bbt.modelBuilder.createCapsule(playerRad, playerHeight, 16, material, attributes);
-		bbt.disposables.add(capsule);
-		bbt.world.addConstructor("capsule", new BulletConstructor(capsule, null));
-		character = bbt.world.add("capsule", 2.5f, 10f, 5f);
+//		final Material material = new Material(ColorAttribute.createDiffuse(Color.BLUE));
+//		final long attributes = Usage.Position | Usage.Normal;
+//		final Model capsule = bbt.modelBuilder.createCapsule(playerRad, playerHeight, 16, material, attributes);
+//		bbt.disposables.add(capsule);
+        
+        final Texture texture = new Texture(Gdx.files.internal("et/STONE.png"));
+        bbt.disposables.add(texture);
+        final Material material = new Material(TextureAttribute.createDiffuse(texture), ColorAttribute.createSpecular(1,1,1,1), FloatAttribute.createShininess(8f));
+        final long attributes = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
+        final Model playerModel = bbt.modelBuilder.createBox(playerRad, playerHeight, playerRad, material, attributes);
+		bbt.disposables.add(playerModel);
+        
+		bbt.world.addConstructor("player", new BulletConstructor(playerModel, null));
+		character = bbt.world.add("player", 2.5f, 10f, 5f);
 		character.invisible = false;
 		characterTransform = character.transform;
         characterTransform.rotate(Vector3.X, 90);
 
 		ghostObject = new btPairCachingGhostObject();
 		ghostObject.setWorldTransform(characterTransform);
-		ghostShape = new btCapsuleShape(playerRad, playerHeight - (2 * playerRad));
+		ghostShape = new btBoxShape(new Vector3(playerRad, playerHeight, playerRad));
 		ghostObject.setCollisionShape(ghostShape);
 		ghostObject.setCollisionFlags(btCollisionObject.CollisionFlags.CF_CHARACTER_OBJECT);
 		(characterController = new btKinematicCharacterController(ghostObject, ghostShape, .35f, Vector3.Y)).setJumpSpeed(12);
@@ -105,9 +114,9 @@ public class Player {
 		ghostObject.setWorldTransform(characterTransform);
 
 		characterDirection.set(-1, 0, 0).rot(characterTransform).nor();
-		camDirection.set(characterDirection).rotate(camDirection.cpy().scl(1, 0, 1).rotate(Vector3.Y.cpy(), 90), camYAngle);
+		//camDirection.set(characterDirection).rotate(camDirection.cpy().scl(1, 0, 1).rotate(Vector3.Y.cpy(), 0), camYAngle);
 
-		camYAngle = MathUtils.clamp(camYAngle + Gdx.input.getDeltaY() * yScalar, -44.5f, 44.5f);
+		//camYAngle = MathUtils.clamp(camYAngle + Gdx.input.getDeltaY() * yScalar, -44.5f*4, 44.5f*4);
 
 		walkDirection.set(0, 0, 0);
 		if (Gdx.input.isKeyPressed(Keys.W) | objController.frontPressed)
@@ -127,9 +136,9 @@ public class Player {
 		characterController.setWalkDirection(walkDirection);
 
 		character.modelInstance.transform.getTranslation(bbt.camera.position);
-		camDirection.rotate(camDirection.cpy().scl(1, 0, 1).rotate(Vector3.Y.cpy(), 90), camYAngle);
+		//camDirection.rotate(camDirection.cpy().scl(1, 0, 1).rotate(Vector3.Y.cpy(), 90), camYAngle);
 
-		bbt.camera.direction.set(camDirection);
+		//bbt.camera.direction.set(camDirection);
 	}
 
 	public void walk(DIRECTION direction) {
