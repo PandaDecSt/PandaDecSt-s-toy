@@ -15,40 +15,22 @@ public class FileMenu extends Menu {
     private MenuItem newProject;
     private MenuItem openProject;
     private MenuItem saveProject;
+    FileChoosers f = new FileChoosers();
 
     public FileMenu(final Stage stage) {
         super("项目");
-        
-        final FileChooser saveFileChooser = new FileChooser(FileChooser.Mode.SAVE);
-        saveFileChooser.setSelectionMode(FileChooser.SelectionMode.FILES);
-        saveFileChooser.setDefaultFileName("current_data.autom");
-        saveFileChooser.setListener(new FileChooserAdapter() {
-                @Override
-                public void selected(Array<FileHandle> file) {
-
-                }
-            });
-
-        final FileChooser loadFileChooser = new FileChooser(FileChooser.Mode.OPEN);
-        loadFileChooser.setSelectionMode(FileChooser.SelectionMode.FILES);
-        loadFileChooser.setListener(new FileChooserAdapter() {
-                @Override
-                public void selected(Array<FileHandle> file) {
-
-                }
-            });
 
         newProject = new MenuItem("创建项目");
         openProject = new MenuItem("打开项目",new ChangeListener() {
                 @Override
                 public void changed (ChangeEvent event, Actor actor) {
-                    stage.addActor(loadFileChooser.fadeIn());
+                    stage.addActor(f.loadFileChooser.fadeIn());
                 }
             });
         saveProject = new MenuItem("保存项目",new ChangeListener() {
                 @Override
                 public void changed (ChangeEvent event, Actor actor) {
-                    stage.addActor(saveFileChooser.fadeIn());
+                    stage.addActor(f.saveFileChooser.fadeIn());
                 }
             });
 

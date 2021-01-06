@@ -94,7 +94,7 @@ public class CharacterTest extends BaseBulletTest {
 
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-        shoot(x, y, 20f);
+        shootNew(x, y, 20f);
         return super.touchDown(x, y, pointer, button);
     }
 

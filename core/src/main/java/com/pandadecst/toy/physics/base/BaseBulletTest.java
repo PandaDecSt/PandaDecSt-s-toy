@@ -54,6 +54,7 @@ import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 import com.pandadecst.toy.world.SkyBox;
 import com.pandadecst.toy.ui.ObjectController;
+import com.pandadecst.toy.tool.Logger;
 
 /** @author xoppa */
 public class BaseBulletTest extends BulletTest {
@@ -67,7 +68,7 @@ public class BaseBulletTest extends BulletTest {
     public Stage uistage = new Stage(new ScreenViewport());
 
     public InputMultiplexer inputMultiplexer;
-    
+
     public ObjectController objController = new ObjectController();
 
 	public static void init() {
@@ -149,7 +150,7 @@ public class BaseBulletTest extends BulletTest {
 		disposables.add(groundModel);
         final Texture texture = new Texture(Gdx.files.internal("et/STONE.png"));
         disposables.add(texture);
-        final Material material = new Material(TextureAttribute.createDiffuse(texture), ColorAttribute.createSpecular(1,1,1,1), FloatAttribute.createShininess(8f));
+        final Material material = new Material(TextureAttribute.createDiffuse(texture), ColorAttribute.createSpecular(1, 1, 1, 1), FloatAttribute.createShininess(8f));
 		final long attributes = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
 		final Model boxModel = modelBuilder.createBox(1f, 1f, 1f, material, attributes);
 		disposables.add(boxModel);
@@ -158,8 +159,9 @@ public class BaseBulletTest extends BulletTest {
 		world.addConstructor("ground", new BulletConstructor(groundModel, 0f)); // mass = 0: static body
 		world.addConstructor("box", new BulletConstructor(boxModel, 1f)); // mass = 1kg: dynamic body
 		world.addConstructor("staticbox", new BulletConstructor(boxModel, 0f)); // mass = 0: static body
+        world.addConstructor("new", new BulletConstructor(boxModel, 1f));
 
-        UiCreator.createVisUi(uistage, inputMultiplexer);
+        UiCreator.createVisUi(uistage, inputMultiplexer, this);
         UiCreator.createNewObj(uistage, objController);
 
         skybox = new SkyBox(camera);
@@ -217,6 +219,7 @@ public class BaseBulletTest extends BulletTest {
 		performance.setLength(0);
 		performance.append("FPS: ").append(fpsCounter.value).append(", Bullet: ")
 			.append((int)(performanceCounter.load.value * 100f)).append("%");
+        Logger.log("debugInput", performance.toString());
 	}
 
 	protected void beginRender(boolean lighting) {
@@ -251,6 +254,10 @@ public class BaseBulletTest extends BulletTest {
 
 	public BulletEntity shoot(final float x, final float y, final float impulse) {
 		return shoot("box", x, y, impulse);
+	}
+    
+    public BulletEntity shootNew(final float x, final float y, final float impulse) {
+        return shoot("new", x, y, impulse);
 	}
 
 	public BulletEntity shoot(final String what, final float x, final float y, final float impulse) {

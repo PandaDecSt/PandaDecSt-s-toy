@@ -10,15 +10,20 @@ import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import com.pandadecst.toy.tool.Logger;
+import com.pandadecst.toy.physics.base.BaseBulletTest;
 
 public class UiCreator {
 
-//    public void resize(int width, int height) {
-//        getViewport().update(width, height, true);
-//    }
-
-    public static void createVisUi(final Stage stage, InputMultiplexer inputMultiplexer) {
-        Logger.log("xyUi", "ui初始化ing");
+    public static HelpMenu helpMenu;
+    public static FileMenu fileMenu;
+    public static WindowMenu windowMenu;
+    public static EditMenu editMenu;
+    
+    static BaseBulletTest bbt;
+    
+    public static void createVisUi(final Stage stage, InputMultiplexer inputMultiplexer, BaseBulletTest b) {
+        bbt = b;
+        Logger.log("Ui", "ui初始化ing");
         final Table root = new Table();
         root.setFillParent(true);
         stage.addActor(root);
@@ -31,40 +36,40 @@ public class UiCreator {
         menuBar.setMenuListener(new MenuBar.MenuBarListener() {
                 @Override
                 public void menuOpened(Menu menu) {
-                    Logger.log("xyUi", "Opened menu: " + menu.getTitle());
+                    Logger.log("Ui", "Opened menu: " + menu.getTitle());
                 }
 
                 @Override
                 public void menuClosed(Menu menu) {
-                    Logger.log("xyUi", "Closed menu: " + menu.getTitle());
+                    Logger.log("Ui", "Closed menu: " + menu.getTitle());
                 }
             });
         root.add(menuBar.getTable()).expandX().fillX().row();
         root.add().expand().fill();
 
         createMenus(stage, menuBar);
-        
-        Logger.log("xyUi", "ui初始化完毕");
+
+        Logger.log("Ui", "ui初始化完毕");
 
 //      stage.addActor(new TestMultiSplitPane());       
     }
-    
-    public static void createNewObj(Stage stage, Actor obj){
+
+    public static void createNewObj(Stage stage, Actor obj) {
         stage.addActor(obj);
     }
 
     private static void createMenus(final Stage stage, MenuBar menuBar) {
 
-        HelpMenu helpMenu = new HelpMenu(stage);
-        EditMenu editMenu = new EditMenu();
-        FileMenu fileMenu = new FileMenu(stage);
-        WindowMenu windowMenu = new WindowMenu();
+        helpMenu = new HelpMenu(stage);
+        editMenu = new EditMenu(stage, bbt);
+        fileMenu = new FileMenu(stage);
+        windowMenu = new WindowMenu();
 
         menuBar.addMenu(fileMenu);
         menuBar.addMenu(editMenu);
         menuBar.addMenu(windowMenu);
         menuBar.addMenu(helpMenu);
-        Logger.log("xyUi", "菜单创建完毕");
+        Logger.log("Ui", "菜单创建完毕");
     }
 
     private static MenuItem createDoubleNestedMenu() {

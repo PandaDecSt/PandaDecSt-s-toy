@@ -39,6 +39,9 @@ public class BaseWorld<T extends BaseEntity> implements Disposable {
 	private final Array<Model> models = new Array<Model>();
 
 	public void addConstructor(final String name, final Constructor<T> constructor) {
+        if (constructors.get(name) != null){
+            constructors.remove(name);
+        }
 		constructors.put(name, constructor);
 		if (constructor.model != null && !models.contains(constructor.model, true)) models.add(constructor.model);
 	}
