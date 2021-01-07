@@ -31,19 +31,19 @@ public class EditMenu extends Menu {
         paste = new MenuItem("粘贴");
         undo = new MenuItem(" < ");
         redo = new MenuItem(" > ");
-        add = new MenuItem("添加");
-        
-        f.loadFileChooser.setListener(new FileChooserAdapter() {
-                @Override
-                public void selected(Array<FileHandle> file) {
-                    model = modelLoader.loadModel(file.get(0));
-                    bbt.world.addConstructor("new", new BulletConstructor(model, 1f));
-                }
-            });
+        add = new MenuItem("添加");        
         
         add.addListener(new ChangeListener() {
                 @Override
                 public void changed (ChangeEvent event, Actor actor) {
+                    f.loadFileChooser.setListener(new FileChooserAdapter() {
+                            @Override
+                            public void selected(Array<FileHandle> file) {
+                                model = modelLoader.loadModel(file.get(0));
+                                bbt.world.addConstructor("new", new BulletConstructor(model, 1f));
+                            }
+                        });
+ 
                     stage.addActor(f.loadFileChooser.fadeIn());
                 }
             });
