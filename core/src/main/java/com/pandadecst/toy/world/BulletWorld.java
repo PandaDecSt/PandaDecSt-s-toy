@@ -17,8 +17,14 @@
 package com.pandadecst.toy.world;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.Renderable;
+import com.badlogic.gdx.graphics.g3d.Shader;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.DebugDrawer;
 import com.badlogic.gdx.physics.bullet.collision.btBroadphaseInterface;
@@ -53,8 +59,8 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 	public int maxSubSteps = 5;
 	public float fixedTimeStep = 1f / 120f;
 
-	public BulletWorld (final btCollisionConfiguration collisionConfiguration, final btCollisionDispatcher dispatcher,
-		final btBroadphaseInterface broadphase, final btConstraintSolver solver, final btCollisionWorld world, final Vector3 gravity) {
+	public BulletWorld(final btCollisionConfiguration collisionConfiguration, final btCollisionDispatcher dispatcher,
+                       final btBroadphaseInterface broadphase, final btConstraintSolver solver, final btCollisionWorld world, final Vector3 gravity) {
 		this.collisionConfiguration = collisionConfiguration;
 		this.dispatcher = dispatcher;
 		this.broadphase = broadphase;
@@ -64,12 +70,12 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 		this.gravity = gravity;
 	}
 
-	public BulletWorld (final btCollisionConfiguration collisionConfiguration, final btCollisionDispatcher dispatcher,
-		final btBroadphaseInterface broadphase, final btConstraintSolver solver, final btCollisionWorld world) {
+	public BulletWorld(final btCollisionConfiguration collisionConfiguration, final btCollisionDispatcher dispatcher,
+                       final btBroadphaseInterface broadphase, final btConstraintSolver solver, final btCollisionWorld world) {
 		this(collisionConfiguration, dispatcher, broadphase, solver, world, new Vector3(0, -10, 0));
 	}
 
-	public BulletWorld (final Vector3 gravity) {
+	public BulletWorld(final Vector3 gravity) {
 		collisionConfiguration = new btDefaultCollisionConfiguration();
 		dispatcher = new btCollisionDispatcher(collisionConfiguration);
 		broadphase = new btDbvtBroadphase();
@@ -79,12 +85,46 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 		this.gravity = gravity;
 	}
 
-	public BulletWorld () {
+	public BulletWorld() {
 		this(new Vector3(0, -10f, 0));
 	}
 
+    public static Renderable createRenderableFromMesh(Mesh mesh, Material material, Shader shader, Environment environment) {
+        Renderable outRend=new Renderable();
+        outRend.meshPart.mesh = mesh;
+        outRend.meshPart.primitiveType = GL20.GL_TRIANGLES;
+        if (material != null) outRend.material = material;
+        if (environment != null) outRend.environment = environment;
+        outRend.meshPart.offset = 0;
+        //strada.shader=elrShader;
+        if (shader != null) outRend.shader = shader;
+        outRend.meshPart.size = mesh.getNumIndices();
+        return outRend;
+	}
+
+    public static Model createRenderingModel(Model model, Material material, Shader shader, Environment environment) {
+        model.nodes.get(0).parts.get(0).setRenderable(
+            createRenderableFromMesh(
+                model.nodes.get(0).parts.get(0).meshPart.mesh,
+                material,
+                shader, environment));
+        return model;
+	}
+
+    public static Model createRenderingModel(Model model, Shader shader, Environment environment) {
+        for (int i = 0; i < model.nodes.size; i++) {
+            for (int j = 0; j < model.nodes.get(i).parts.size; j++) {
+                model.nodes.get(i).parts.get(j).setRenderable(
+                    createRenderableFromMesh(model.nodes.get(i).parts.get(j).meshPart.mesh,
+                                             model.nodes.get(i).parts.get(j).material,
+                                             shader, environment));
+            }
+        }
+        return model;
+	}
+
 	@Override
-	public void add (final BulletEntity entity) {
+	public void add(final BulletEntity entity) {
 		super.add(entity);
 		if (entity.body != null) {
 			if (entity.body instanceof btRigidBody)
@@ -97,7 +137,7 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 	}
 
 	@Override
-	public void update () {
+	public void update() {
 		if (performanceCounter != null) {
 			performanceCounter.tick();
 			performanceCounter.start();
@@ -108,7 +148,7 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 	}
 
 	@Override
-	public void render (ModelBatch batch, Environment lights, Iterable<BulletEntity> entities) {
+	public void render(ModelBatch batch, Environment lights, Iterable<BulletEntity> entities) {
 		if (renderMeshes) super.render(batch, lights, entities);
 		if (debugDrawer != null && debugDrawer.getDebugMode() > 0) {
 			batch.flush();
@@ -119,7 +159,7 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 	}
 
 	@Override
-	public void dispose () {
+	public void dispose() {
 		for (int i = 0; i < entities.size; i++) {
 			btCollisionObject body = entities.get(i).body;
 			if (body != null) {
@@ -139,13 +179,13 @@ public class BulletWorld extends BaseWorld<BulletEntity> {
 		if (collisionConfiguration != null) collisionConfiguration.dispose();
 	}
 
-	public void setDebugMode (final int mode) {
+	public void setDebugMode(final int mode) {
 		if (mode == btIDebugDraw.DebugDrawModes.DBG_NoDebug && debugDrawer == null) return;
 		if (debugDrawer == null) collisionWorld.setDebugDrawer(debugDrawer = new DebugDrawer());
 		debugDrawer.setDebugMode(mode);
 	}
 
-	public int getDebugMode () {
+	public int getDebugMode() {
 		return (debugDrawer == null) ? 0 : debugDrawer.getDebugMode();
 	}
 }

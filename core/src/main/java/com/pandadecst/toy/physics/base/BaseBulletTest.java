@@ -49,12 +49,12 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.pandadecst.toy.tool.BulletConstructor;
 import com.pandadecst.toy.tool.FPSCameraController;
+import com.pandadecst.toy.tool.Logger;
+import com.pandadecst.toy.ui.ObjectController;
 import com.pandadecst.toy.ui.UiCreator;
 import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 import com.pandadecst.toy.world.SkyBox;
-import com.pandadecst.toy.ui.ObjectController;
-import com.pandadecst.toy.tool.Logger;
 
 /** @author xoppa */
 public class BaseBulletTest extends BulletTest {
@@ -95,7 +95,7 @@ public class BaseBulletTest extends BulletTest {
 	private int debugMode = DebugDrawModes.DBG_NoDebug;
 
 	protected final static Vector3 tmpV1 = new Vector3(), tmpV2 = new Vector3();
-
+    
 	public BulletWorld createWorld() {
 		return new BulletWorld();
 	}
@@ -103,6 +103,7 @@ public class BaseBulletTest extends BulletTest {
 	@Override
 	public void show() {
 		init();
+
 		environment = new Environment();
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.3f, 0.3f, 0.3f, 1.f));
 		light = shadows ? new DirectionalShadowLight(1928, 1080, 20f, 20f, 1f, 3000f) : new DirectionalLight();
@@ -152,7 +153,7 @@ public class BaseBulletTest extends BulletTest {
         disposables.add(texture);
         final Material material = new Material(TextureAttribute.createDiffuse(texture), ColorAttribute.createSpecular(1, 1, 1, 1), FloatAttribute.createShininess(8f));
 		final long attributes = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
-		final Model boxModel = modelBuilder.createBox(1f, 1f, 1f, material, attributes);
+        Model boxModel = modelBuilder.createBox(1f, 1f, 1f, material, attributes);
 		disposables.add(boxModel);
 
 		// Add the constructors
