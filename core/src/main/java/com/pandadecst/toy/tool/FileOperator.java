@@ -1,86 +1,67 @@
 package com.pandadecst.toy.tool;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonValue.ValueType;
 import com.badlogic.gdx.utils.JsonWriter;
-import com.badlogic.gdx.utils.UBJsonReader;
-import com.badlogic.gdx.utils.UBJsonWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Writer;
-import java.util.ArrayList;
 
-/** 
- * 
- * @author Danilo Costa Viana */
-public class G3DConverter {
+public class FileOperator {
 
-    public static void g3djs2g3dbs(FileHandle g3djFolder, boolean overwrite) throws IOException {
-        ArrayList<FileHandle> g3djFiles = new ArrayList<FileHandle>();
-
-        if (g3djFolder != null) {
-            if (g3djFolder.isDirectory()) {
-                for (FileHandle handle : g3djFolder.list()) {
-                    if (handle.name().toLowerCase().endsWith(".g3dj")) {
-                        g3djFiles.add(handle);
-                    }
-                }
-            } else if (g3djFolder.name().toLowerCase().endsWith(".g3dj")) {
-                FileHandle g3djFile = g3djFolder;
-                g3djFolder = g3djFolder.parent();
-                g3djFiles.add(g3djFile);
-            }
+    public static Object load(Object obj, String str) {
+        if (!str.isEmpty()) {
+            Json json = new Json();
+            return json.fromJson(obj.getClass(), str);
         }
-
-        for (FileHandle handle : g3djFiles) {
-            g3dj2g3db(handle, overwrite);
-        }
+        return null;
     }
 
-    public static void g3dj2g3db(FileHandle g3djFile, boolean overwrite) throws IOException {
-        FileHandle newFile = new FileHandle(g3djFile.pathWithoutExtension() + ".g3db");
-        int noOverwriteCounter = 0;
-        while (!overwrite && newFile.exists()) {
-            newFile = new FileHandle(g3djFile.pathWithoutExtension() + "(" + (++noOverwriteCounter) + ").g3db");
+    public static Class load(Class cl, String str) {
+        if (!str.isEmpty()) {
+            Json json = new Json();
+            return json.fromJson(cl, str);
         }
-
-        OutputStream fileOutputStream = newFile.write(false);
-        UBJsonWriter writer = new UBJsonWriter(fileOutputStream);
-        JsonReader reader = new JsonReader();
-
-        try {
-            JsonValue root = reader.parse(g3djFile);
-            writeObject(root, writer);
-
-        } finally {
-            writer.close();
-        }
+        return null;
     }
 
-    public static void g3db2g3dj(FileHandle g3dFile, boolean overwrite) throws IOException {
-        FileHandle newFile = new FileHandle(g3dFile.pathWithoutExtension() + ".g3dj");
+    public static String save(Object obj) {
+        return new Json().toJson(obj);
+    }
+
+    public static String save(Class cl) {
+        return new Json().toJson(cl);
+    }
+
+
+    
+
+    public static void FormatJsonFile(FileHandle json, boolean overwrite) throws IOException {
+        FileHandle newFile = new FileHandle(json.pathWithoutExtension() + "." + json.extension());
         int noOverwriteCounter = 0;
         while (!overwrite && newFile.exists()) {
-            newFile = new FileHandle(g3dFile.pathWithoutExtension() + "(" + (++noOverwriteCounter) + ").g3dj");
+            newFile = new FileHandle(json.pathWithoutExtension() + "(" + (++noOverwriteCounter) + ")." + json.extension());
         }
 
         Writer w = newFile.writer(false);
 
         JsonWriter writer = new JsonWriter(w);
-        UBJsonReader reader = new UBJsonReader();
+        JsonReader reader = new JsonReader();
 
         try {
-            JsonValue root = reader.parse(g3dFile);
-            FileOperator.FormatJson(root, writer);
+            JsonValue root = reader.parse(json);
+            FormatJson(root, writer);
 
         } finally {
             writer.close();
         }
     }
 
-    private static void writeObject(JsonValue root, UBJsonWriter writer) throws IOException {
+    public static void FormatJson(JsonValue root, JsonWriter writer) throws IOException {
         if (root.type() == ValueType.array) {
             if (root.name() != null) {
                 writer.array(root.name());
@@ -132,13 +113,14 @@ public class G3DConverter {
 
                 case nullValue:
                     if (child.name() != null) {
-                        writer.set(child.name());
+                        writer.set(child.name(), "");
                     }
                     break;
 
                 case array:
                 case object:
-                    writeObject(child, writer);
+                    FormatJson(child, writer);
+                    writer.append("\n");
                     break;
             }
 
@@ -148,5 +130,15 @@ public class G3DConverter {
         writer.pop();
     }
 
-}
+    public static void write(String path, String str) {
+        try {
+            FileOutputStream mFileOutputStream = new FileOutputStream(path);
+            mFileOutputStream.write(str.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+}

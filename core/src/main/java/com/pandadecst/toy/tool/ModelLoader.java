@@ -53,5 +53,18 @@ public class ModelLoader {
             }
         }
     }
+    
+//    public static Model Json2Model(Model nullm, String str){
+//        return (Model)FileOperator.load(nullm, str);
+//    }
+    
+//    public static Model Json2Model(Model nullm, FileHandle f){
+//        if (f.exists()) {
+//        return Json2Model(nullm, f.readString());
+//        }
+//        return null;
+//    }
+    
+    
 
 }

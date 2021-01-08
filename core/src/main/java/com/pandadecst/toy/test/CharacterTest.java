@@ -60,6 +60,7 @@ public class CharacterTest extends BaseBulletTest {
 	@Override
 	public void show() {
 		super.show();
+        ModelFactory.cutmodel();
         player = new Player(this, objController);
         world.collisionWorld.addCollisionObject(player.ghostObject,
                                                 (short) btBroadphaseProxy.CollisionFilterGroups.CharacterFilter,                                         (short) (btBroadphaseProxy.CollisionFilterGroups.StaticFilter
