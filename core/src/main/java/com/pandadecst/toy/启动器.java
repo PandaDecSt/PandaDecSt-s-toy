@@ -12,6 +12,6 @@ public class 启动器 extends Game {
     @Override
     public void create() {
         skin = VisCHLoader.load(); 
-        setScreen(new OcclusionCullingTest());
+        setScreen(new FrustumCullingTest());
     }
 }
