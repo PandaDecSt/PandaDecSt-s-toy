@@ -30,6 +30,7 @@ import com.pandadecst.toy.physics.base.BaseEntity;
 /** @author xoppa Renderable BaseEntity with a bullet physics body. */
 public class BulletEntity extends BaseEntity {
 	private final static Matrix4 tmpM = new Matrix4();
+    public float mass = 0;
 	public BulletEntity.MotionState motionState;
 	public btCollisionObject body;
 

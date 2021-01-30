@@ -55,6 +55,7 @@ import com.pandadecst.toy.ui.UiCreator;
 import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 import com.pandadecst.toy.world.SkyBox;
+import com.pandadecst.toy.tool.ModelFactory;
 
 /** @author xoppa */
 public class BaseBulletTest extends BulletTest {
@@ -90,6 +91,7 @@ public class BaseBulletTest extends BulletTest {
 	public BulletWorld world;
 	public ObjLoader objLoader = new ObjLoader();
 	public ModelBuilder modelBuilder = new ModelBuilder();
+    ModelFactory modelFactory = new ModelFactory();
 	public ModelBatch modelBatch;
 	public Array<Disposable> disposables = new Array<Disposable>();
 	private int debugMode = DebugDrawModes.DBG_NoDebug;
