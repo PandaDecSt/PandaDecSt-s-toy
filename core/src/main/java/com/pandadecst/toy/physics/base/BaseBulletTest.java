@@ -50,12 +50,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.pandadecst.toy.tool.BulletConstructor;
 import com.pandadecst.toy.tool.FPSCameraController;
 import com.pandadecst.toy.tool.Logger;
+import com.pandadecst.toy.tool.MeshHelper;
+import com.pandadecst.toy.tool.ModelFactory;
 import com.pandadecst.toy.ui.ObjectController;
 import com.pandadecst.toy.ui.UiCreator;
 import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 import com.pandadecst.toy.world.SkyBox;
-import com.pandadecst.toy.tool.ModelFactory;
 
 /** @author xoppa */
 public class BaseBulletTest extends BulletTest {
@@ -157,6 +158,19 @@ public class BaseBulletTest extends BulletTest {
 		final long attributes = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
         Model boxModel = modelBuilder.createBox(1f, 1f, 1f, material, attributes);
 		disposables.add(boxModel);
+        float v[] = MeshHelper.getVertices(boxModel.meshParts.get(0).mesh);
+        Gdx.app.log("meshhelper", v.length+"");
+        for (int i = 0; i < v.length; i+=3) {
+            Gdx.app.log("meshhelper", v[i]+","+v[i+1]+","+v[i+2]);
+        }
+        
+        short s[] = MeshHelper.getIndices(boxModel.meshParts.get(0).mesh);
+        Gdx.app.log("meshhelper", s.length+"");
+        for (int i = 0; i < s.length; i++) {
+            Gdx.app.log("meshhelper", s[i]+"");
+        }
+        Gdx.app.log("meshhelper", "over");
+        
 
 		// Add the constructors
 		world.addConstructor("ground", new BulletConstructor(groundModel, 0f)); // mass = 0: static body
