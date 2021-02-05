@@ -28,14 +28,22 @@ public class ModelFactory {
         ,5,0,-5
         };
 
-    public void cutmodel() {
-        Model r = createModelbyVertexs(v, new Material(ColorAttribute.createDiffuse(Color.WHITE), ColorAttribute.createSpecular(Color.WHITE)), Usage.Position | Usage.Normal);
-
+//    public void cutmodel() {
+//        Model r = createModelbyVertexs(v, new Material(ColorAttribute.createDiffuse(Color.WHITE), ColorAttribute.createSpecular(Color.WHITE)), Usage.Position | Usage.Normal);
+//    }
+    
+    public Model mesh2model(Mesh m1,Material m, long a) {
+        begin();
+        part("m2m", m1, m);
+        return end();
     }
     
-    public Model testmodel(Material m, long a) {
-        return createModelbyVertexs(v, m, a);
-
+    public Model meshes2model(Material m, long a, Mesh... ms) {
+        begin();
+        for (Mesh m0: ms){
+            part("m2m", m0, m);
+        }
+        return end();
     }
 
     Model model;
@@ -136,11 +144,21 @@ public class ModelFactory {
     public MeshPart part(final String id, final Mesh mesh, int primitiveType, final Material material) {
         return part(id, mesh, primitiveType, 0, mesh.getNumIndices(), material);
     }
+    
+    public MeshPart part(final String id, final Mesh mesh, final Material material) {
+        return part(id, mesh, GL20.GL_TRIANGLES, 0, mesh.getNumIndices(), material);
+    }
 
     //创建一个新mesh到当前node
     public MeshPartBuilder part(final String id, int primitiveType, final VertexAttributes attributes, final Material material) {
         final MeshBuilder builder = getBuilder(attributes);
         part(builder.part(id, primitiveType), material);
+        return builder;
+    }
+    
+    public MeshPartBuilder part(final String id, final VertexAttributes attributes, final Material material) {
+        final MeshBuilder builder = getBuilder(attributes);
+        part(builder.part(id, GL20.GL_TRIANGLES), material);
         return builder;
     }
 

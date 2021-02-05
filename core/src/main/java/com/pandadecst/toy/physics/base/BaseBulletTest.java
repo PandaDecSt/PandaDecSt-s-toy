@@ -57,6 +57,7 @@ import com.pandadecst.toy.ui.UiCreator;
 import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 import com.pandadecst.toy.world.SkyBox;
+import com.pandadecst.toy.tool.p3dLoader;
 
 /** @author xoppa */
 public class BaseBulletTest extends BulletTest {
@@ -163,20 +164,36 @@ public class BaseBulletTest extends BulletTest {
         for (int i = 0; i < v.length; i+=3) {
             Gdx.app.log("meshhelper", v[i]+","+v[i+1]+","+v[i+2]);
         }
+        String str = "";
+        for (int i = 0; i < v.length; i++) {
+            str = str+v[i]+",";
+        }
+        Gdx.app.log("meshhelper", str);
         
         short s[] = MeshHelper.getIndices(boxModel.meshParts.get(0).mesh);
         Gdx.app.log("meshhelper", s.length+"");
         for (int i = 0; i < s.length; i++) {
             Gdx.app.log("meshhelper", s[i]+"");
         }
+        str="";
+        for (int i = 0; i < s.length; i++) {
+            str = str+s[i]+",";
+        }
+        Gdx.app.log("meshhelper", str);
+        
         Gdx.app.log("meshhelper", "over");
+        
+        Model test = //p3dLoader.loadmodel(Gdx.files.external("/storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
+        modelFactory.mesh2model(
+            MeshHelper.createMesh(v, s, boxModel.meshParts.get(0).mesh.getVertexAttributes()),
+            material,attributes);
         
 
 		// Add the constructors
 		world.addConstructor("ground", new BulletConstructor(groundModel, 0f)); // mass = 0: static body
 		world.addConstructor("box", new BulletConstructor(boxModel, 1f)); // mass = 1kg: dynamic body
 		world.addConstructor("staticbox", new BulletConstructor(boxModel, 0f)); // mass = 0: static body
-        world.addConstructor("new", new BulletConstructor(boxModel, 1f));
+        world.addConstructor("new", new BulletConstructor(test, 1f));
 
         UiCreator.createVisUi(uistage, inputMultiplexer, this);
         UiCreator.createNewObj(uistage, objController);
