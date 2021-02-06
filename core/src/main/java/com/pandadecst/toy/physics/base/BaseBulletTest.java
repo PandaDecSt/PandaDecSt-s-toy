@@ -60,6 +60,7 @@ import com.pandadecst.toy.world.SkyBox;
 import com.pandadecst.toy.tool.p3dLoader;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.Mesh;
+import java.util.List;
 
 /** @author xoppa */
 public class BaseBulletTest extends BulletTest {
@@ -161,31 +162,34 @@ public class BaseBulletTest extends BulletTest {
 		final long attributes = Usage.Position | Usage.Normal | Usage.TextureCoordinates;
         Model boxModel = modelBuilder.createBox(1f, 1f, 1f, material, attributes);
 		disposables.add(boxModel);
+        List<Vector3> pos = MeshHelper.getPositions(boxModel.meshParts.get(0).mesh);
         float v[] = MeshHelper.getVertices(boxModel.meshParts.get(0).mesh);
-        Gdx.app.log("meshhelper", v.length + "");
-        for (int i = 0; i < v.length; i += 3) {
-            Gdx.app.log("meshhelper", v[i] + "," + v[i + 1] + "," + v[i + 2]);
-        }
-        String str = "";
-        for (int i = 0; i < v.length; i++) {
-            str = str + v[i] + ",";
-        }
-        Gdx.app.log("meshhelper", str);
-
+//        Gdx.app.log("meshhelper", v.length + "");
+//        for (int i = 0; i < v.length; i += 3) {
+//            Gdx.app.log("meshhelper", v[i] + "," + v[i + 1] + "," + v[i + 2]);
+//        }
+//        String str = "";
+//        for (int i = 0; i < v.length; i++) {
+//            str = str + v[i] + ",";
+//        }
+//        Gdx.app.log("meshhelper", str);
+//
         short s[] = MeshHelper.getIndices(boxModel.meshParts.get(0).mesh);
-        Gdx.app.log("meshhelper", s.length + "");
-        for (int i = 0; i < s.length; i++) {
-            Gdx.app.log("meshhelper", s[i] + "");
-        }
-        str = "";
-        for (int i = 0; i < s.length; i++) {
-            str = str + s[i] + ",";
-        }
-        Gdx.app.log("meshhelper", str);
-
-        Gdx.app.log("meshhelper", "over");
-
-        Model test = p3dLoader.loadmodel(Gdx.files.absolute("./storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
+        MeshHelper.getPositions(boxModel.meshParts.get(0).mesh);
+        MeshHelper.getTriangles(boxModel.meshParts.get(0).mesh);
+//        Gdx.app.log("meshhelper", s.length + "");
+//        for (int i = 0; i < s.length; i++) {
+//            Gdx.app.log("meshhelper", s[i] + "");
+//        }
+//        str = "";
+//        for (int i = 0; i < s.length; i++) {
+//            str = str + s[i] + ",";
+//        }
+//        Gdx.app.log("meshhelper", str);
+//
+//        Gdx.app.log("meshhelper", "over");
+//
+        Model test = boxModel;//p3dLoader.loadmodel(Gdx.files.absolute("./storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
 //            modelFactory.mesh2model(
 //            MeshHelper.createMesh(v, s, boxModel.meshParts.get(0).mesh.getVertexAttributes()),
 //            material, attributes);

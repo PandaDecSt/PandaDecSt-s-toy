@@ -35,4 +35,9 @@ public class Triangle {
         return v2;
     }
 
+    @Override
+    public String toString() {
+        return v0.toString()+","+v1.toString()+","+v2.toString();
+    }
+
 }

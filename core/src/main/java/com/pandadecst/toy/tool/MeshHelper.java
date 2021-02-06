@@ -1,25 +1,36 @@
 package com.pandadecst.toy.tool;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Mesh;
-import com.badlogic.gdx.graphics.VertexAttributes;
-import com.badlogic.gdx.graphics.VertexAttributes.*;
-import com.badlogic.gdx.math.Vector3;
-import java.util.List;
-import java.util.ArrayList;
 import com.badlogic.gdx.graphics.VertexAttribute;
-import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
-import com.badlogic.gdx.graphics.GL20;
-import java.util.Vector;
+import com.badlogic.gdx.graphics.VertexAttributes;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
+import com.badlogic.gdx.math.Vector3;
+import com.pandadecst.toy.tool.MeshHelper;
 import com.pandadecst.toy.utils.geometry.Triangle;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
 
 /**
  * Created by PandaDecSt on 21.02.04.
  */
 public class MeshHelper {
 
+    static boolean debug = true;
+
     public static float[] getVertices(Mesh m) {
         if (m != null) {
-            return m.getVerticesBuffer().array();
+            float v[] = FloatBuffer2Array(m.getVerticesBuffer());
+            if (debug) {
+                log("vertices.length = " + v.length);
+                for (int i = 0; i < v.length; i += 3) {
+                    log(v[i] + "," + v[i + 1] + "," + v[i + 2]);
+                }
+            }
+            return v;
         } else {
             return null;
         }
@@ -35,6 +46,22 @@ public class MeshHelper {
                 vertices[a++] = t.get(i).z;
             }
             return vertices;
+        } else {
+            return null;
+        }
+    }
+    
+    public static short[] getIndices(Mesh m) {
+        if (m != null) {
+            short s[] = ShortBuffer2Array(m.getIndicesBuffer());
+            if (debug) {
+                log("indices.length = " + s.length);
+                log("numTriangles = " + s.length / 3);
+                for (int i = 0; i < s.length; i += 3) {
+                    log(s[i] + "," + s[i + 1] + "," + s[i + 2]);
+                }
+            }
+            return s;
         } else {
             return null;
         }
@@ -75,18 +102,16 @@ public class MeshHelper {
     public static List<Vector3> getPositions(float[] v) {//Maybe have some problem.
         if (v != null) {
             List<Vector3> ts = new ArrayList<Vector3>();
-            for (int i = 0; i < v.length - 3; i += 3) {
+            for (int i = 0; i < v.length; i += 3) {
                 ts.add(new Vector3(v[i], v[i + 1], v[i + 2]));
+                if (debug) {
+                    log("" + v[i] + v[i + 1] + v[i + 2]);
+                }
+            }
+            if (debug) {
+                log("numPositions = " + ts.size());
             }
             return ts;
-        } else {
-            return null;
-        }
-    }
-
-    public static short[] getIndices(Mesh m) {
-        if (m != null) {
-            return m.getIndicesBuffer().array();
         } else {
             return null;
         }
@@ -96,8 +121,14 @@ public class MeshHelper {
         short indices[] = getIndices(m);
         List<Vector3> pos = tidyPositions(getPositions(m));
         List<Triangle> triangles = new ArrayList<Triangle>();
-        for (int i = 0; i < indices.length - 3; i += 3) {
+        for (int i = 0; i < indices.length; i += 3) {
             triangles.add(new Triangle(pos.get(indices[i]), pos.get(indices[i + 1]), pos.get(indices[i + 2])));
+        }
+        if (debug) {
+            log("triangleSize = " + triangles.size());
+            for (int i = 0; i < triangles.size(); i++) {
+                log(triangles.get(i).toString());
+            }
         }
         return triangles;
     }
@@ -118,6 +149,7 @@ public class MeshHelper {
                 a.add(positions.get(i));
             }
         }
+        if (debug) log("不重复顶点个数 = " + a.size());
         return a;
     }
 
@@ -207,7 +239,7 @@ public class MeshHelper {
         }
         return createMesh(vertices, indices, attributes);
     }
-    
+
     public static Mesh createMesh(List<Triangle> triangles, VertexAttributes attributes) {
         List<Vector3> pos = new ArrayList<Vector3>();
         for (int i = 0; i < triangles.size(); i++) {
@@ -246,6 +278,36 @@ public class MeshHelper {
         mesh.setVertices(cubeVerts);
         mesh.setIndices(indices);
         return mesh;
+    }
+
+    private static float[] FloatBuffer2Array(FloatBuffer b) {
+        if (b != null) {
+            int size = b.limit();
+            float e[] = new float[size];
+            for (int i = 0; i < size; i++) {
+                e[i] = b.get(i);
+            }
+            return e;
+        } else {
+            return null;
+        }
+    }
+
+    private static short[] ShortBuffer2Array(ShortBuffer b) {
+        if (b != null) {
+            int size = b.limit();
+            short e[] = new short[size];
+            for (int i = 0; i < size; i++) {
+                e[i] = b.get(i);
+            }
+            return e;
+        } else {
+            return null;
+        }
+    }
+
+    public static void log(String str) {
+        Gdx.app.log("MeshHelper", str);
     }
 
 }
