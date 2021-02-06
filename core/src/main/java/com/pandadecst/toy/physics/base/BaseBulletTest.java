@@ -58,6 +58,8 @@ import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 import com.pandadecst.toy.world.SkyBox;
 import com.pandadecst.toy.tool.p3dLoader;
+import com.badlogic.gdx.graphics.VertexAttribute;
+import com.badlogic.gdx.graphics.Mesh;
 
 /** @author xoppa */
 public class BaseBulletTest extends BulletTest {
@@ -99,7 +101,7 @@ public class BaseBulletTest extends BulletTest {
 	private int debugMode = DebugDrawModes.DBG_NoDebug;
 
 	protected final static Vector3 tmpV1 = new Vector3(), tmpV2 = new Vector3();
-    
+
 	public BulletWorld createWorld() {
 		return new BulletWorld();
 	}
@@ -160,34 +162,34 @@ public class BaseBulletTest extends BulletTest {
         Model boxModel = modelBuilder.createBox(1f, 1f, 1f, material, attributes);
 		disposables.add(boxModel);
         float v[] = MeshHelper.getVertices(boxModel.meshParts.get(0).mesh);
-        Gdx.app.log("meshhelper", v.length+"");
-        for (int i = 0; i < v.length; i+=3) {
-            Gdx.app.log("meshhelper", v[i]+","+v[i+1]+","+v[i+2]);
+        Gdx.app.log("meshhelper", v.length + "");
+        for (int i = 0; i < v.length; i += 3) {
+            Gdx.app.log("meshhelper", v[i] + "," + v[i + 1] + "," + v[i + 2]);
         }
         String str = "";
         for (int i = 0; i < v.length; i++) {
-            str = str+v[i]+",";
+            str = str + v[i] + ",";
         }
         Gdx.app.log("meshhelper", str);
-        
+
         short s[] = MeshHelper.getIndices(boxModel.meshParts.get(0).mesh);
-        Gdx.app.log("meshhelper", s.length+"");
+        Gdx.app.log("meshhelper", s.length + "");
         for (int i = 0; i < s.length; i++) {
-            Gdx.app.log("meshhelper", s[i]+"");
+            Gdx.app.log("meshhelper", s[i] + "");
         }
-        str="";
+        str = "";
         for (int i = 0; i < s.length; i++) {
-            str = str+s[i]+",";
+            str = str + s[i] + ",";
         }
         Gdx.app.log("meshhelper", str);
-        
+
         Gdx.app.log("meshhelper", "over");
-        
+
         Model test = //p3dLoader.loadmodel(Gdx.files.external("/storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
-        modelFactory.mesh2model(
-            MeshHelper.createMesh(v, s, boxModel.meshParts.get(0).mesh.getVertexAttributes()),
-            material,attributes);
-        
+            modelFactory.mesh2model(
+            MeshHelper.createMesh(MeshHelper.getTriangles(boxModel.meshParts.get(0).mesh), boxModel.meshParts.get(0).mesh.getVertexAttributes()),
+            material, attributes);
+
 
 		// Add the constructors
 		world.addConstructor("ground", new BulletConstructor(groundModel, 0f)); // mass = 0: static body
@@ -289,7 +291,7 @@ public class BaseBulletTest extends BulletTest {
 	public BulletEntity shoot(final float x, final float y, final float impulse) {
 		return shoot("box", x, y, impulse);
 	}
-    
+
     public BulletEntity shootNew(final float x, final float y, final float impulse) {
         return shoot("new", x, y, impulse);
 	}

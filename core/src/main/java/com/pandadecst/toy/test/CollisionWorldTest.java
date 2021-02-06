@@ -22,24 +22,27 @@ public class CollisionWorldTest extends BaseBulletTest {
 
         @Override
         public boolean needsCollision (btCollisionObject body0, btCollisionObject body1) {
-            if(body0.userData instanceof BulletEntity)
-                if(!body0.isStaticObject())
-                world.delete((BulletEntity)body0.userData);
-            if(body1.userData instanceof BulletEntity)
-                if(!body1.isStaticObject())
-                world.delete((BulletEntity)body1.userData);
+//            if(body0.userData instanceof BulletEntity)
+//                if(!body0.isStaticObject())
+//                world.delete((BulletEntity)body0.userData);
+//            if(body1.userData instanceof BulletEntity)
+//                if(!body1.isStaticObject())
+//                world.delete((BulletEntity)body1.userData);
+//            world.add("new",body0.getWorldTransform());
+//            world.add("new",body0.getWorldTransform());
+//            
             if (body0.getUserValue() % 2 == 0 || body1.getUserValue() % 2 == 0) return super.needsCollision(body0, body1);
             return false;
         }
 
         @Override
         public boolean needsResponse (btCollisionObject body0, btCollisionObject body1) {
-            if(body0.userData instanceof BulletEntity)
-                if(!body0.isStaticObject())
-                    world.delete((BulletEntity)body0.userData);
-            if(body1.userData instanceof BulletEntity)
-                if(!body1.isStaticObject())
-                    world.delete((BulletEntity)body1.userData);
+//            if(body0.userData instanceof BulletEntity)
+//                if(!body0.isStaticObject())
+//                    world.delete((BulletEntity)body0.userData);
+//            if(body1.userData instanceof BulletEntity)
+//                if(!body1.isStaticObject())
+//                    world.delete((BulletEntity)body1.userData);
             if (body0.getUserValue() % 2 == 0 || body1.getUserValue() % 2 == 0) return super.needsCollision(body0, body1);
             return false;
         }
