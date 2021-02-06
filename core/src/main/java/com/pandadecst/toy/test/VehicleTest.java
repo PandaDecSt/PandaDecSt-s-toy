@@ -47,10 +47,10 @@ public class VehicleTest extends BaseBulletTest {
 
 		instructions = "Tap to shoot\nArrow keys to drive\nR to reset\nLong press to toggle debug mode\nSwipe for next test";
 
-		final Model chassisModel = createBoxModel(0.6f, 0.3f, 0.4f);
+		final Model chassisModel = objLoader.loadModel(Gdx.files.absolute("./storage/emulated/0/AIDE/girl.obj"));
 		disposables.add(chassisModel);
 		chassisModel.materials.get(0).clear();
-		chassisModel.materials.get(0).set(ColorAttribute.createDiffuse(Color.RED), ColorAttribute.createSpecular(Color.WHITE));
+		chassisModel.materials.get(0).set(ColorAttribute.createDiffuse(Color.GRAY), ColorAttribute.createSpecular(Color.WHITE));
 		final Model wheelModel = createCapsuleModel(0.2f, 0.2f, 0.2f);
 		disposables.add(wheelModel);
 		wheelModel.materials.get(0).clear();
@@ -58,9 +58,9 @@ public class VehicleTest extends BaseBulletTest {
                                         FloatAttribute.createShininess(128));
 		Texture checkboard = new Texture(Gdx.files.internal("et/SAND.png"));
 		final Model largeGroundModel = modelBuilder.createBox(
+			200f,
 			4f,
-			4f,
-			4f,
+			200f,
 			new Material(TextureAttribute.createDiffuse(checkboard), ColorAttribute.createSpecular(Color.WHITE), FloatAttribute
                          .createShininess(16f)), Usage.Position | Usage.Normal | Usage.TextureCoordinates);
 		largeGroundModel.manageDisposable(checkboard);
@@ -74,12 +74,12 @@ public class VehicleTest extends BaseBulletTest {
 		world.addConstructor("chassis", new BulletConstructor(chassisModel, 5f, new btBoxShape(chassisHalfExtents)));
 		world.addConstructor("wheel", new BulletConstructor(wheelModel, 0, null));
 
-		for (int i = 0; i < 40; i += 4) {
-            for (int j = 0; j < 40; j += 4) {
-                world.add("largeground", j, -1f, i);
-            }
-        }
-
+//		for (int i = 0; i < 40; i += 4) {
+//            for (int j = 0; j < 40; j += 4) {
+//                world.add("largeground", j, -1f, i);
+//            }
+//        }
+        world.add("largeground", 20, -1f, 20);
 
 		chassis = world.add("chassis", 0, 3f, 0);
 		wheels[0] = world.add("wheel", 0, 0, 0);

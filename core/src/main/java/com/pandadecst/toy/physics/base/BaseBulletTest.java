@@ -185,10 +185,10 @@ public class BaseBulletTest extends BulletTest {
 
         Gdx.app.log("meshhelper", "over");
 
-        Model test = //p3dLoader.loadmodel(Gdx.files.external("/storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
-            modelFactory.mesh2model(
-            MeshHelper.createMesh(MeshHelper.getTriangles(boxModel.meshParts.get(0).mesh), boxModel.meshParts.get(0).mesh.getVertexAttributes()),
-            material, attributes);
+        Model test = p3dLoader.loadmodel(Gdx.files.absolute("./storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
+//            modelFactory.mesh2model(
+//            MeshHelper.createMesh(v, s, boxModel.meshParts.get(0).mesh.getVertexAttributes()),
+//            material, attributes);
 
 
 		// Add the constructors

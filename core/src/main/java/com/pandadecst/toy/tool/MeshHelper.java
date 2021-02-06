@@ -19,14 +19,7 @@ public class MeshHelper {
 
     public static float[] getVertices(Mesh m) {
         if (m != null) {
-            int size = m.getVerticesBuffer().limit();
-            float vertices[] = new float[size];
-            for (int i = 0; i < size; i++) {
-
-                vertices[i] = m.getVerticesBuffer().get(i);
-
-            }
-            return vertices;
+            return m.getVerticesBuffer().array();
         } else {
             return null;
         }
@@ -93,14 +86,7 @@ public class MeshHelper {
 
     public static short[] getIndices(Mesh m) {
         if (m != null) {
-            int size = m.getIndicesBuffer().limit();
-            short indices[] = new short[size];
-            for (int i = 0; i < size; i++) {
-
-                indices[i] = m.getIndicesBuffer().get(i);
-
-            }
-            return indices;
+            return m.getIndicesBuffer().array();
         } else {
             return null;
         }
