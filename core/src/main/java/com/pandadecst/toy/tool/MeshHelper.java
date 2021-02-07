@@ -383,10 +383,9 @@ public class MeshHelper {
 
     public static void buildTriangle(Vector3 v1, Vector3 v2, Vector3 v3, MeshPartBuilder meshbuild) {
         Vector3 n = calculateNormal(v1, v2, v3);
-        MeshPartBuilder.VertexInfo a = new MeshPartBuilder.VertexInfo().setPos(v1).setNor(n);
-        MeshPartBuilder.VertexInfo b = new MeshPartBuilder.VertexInfo().setPos(v2).setNor(n);
-        MeshPartBuilder.VertexInfo c = new MeshPartBuilder.VertexInfo().setPos(v3).setNor(n);
-        MeshPartBuilder.VertexInfo d;
+        MeshPartBuilder.VertexInfo a = new MeshPartBuilder.VertexInfo().setPos(v1).setNor(n).setCol(Color.WHITE);
+        MeshPartBuilder.VertexInfo b = new MeshPartBuilder.VertexInfo().setPos(v2).setNor(n).setCol(Color.WHITE);
+        MeshPartBuilder.VertexInfo c = new MeshPartBuilder.VertexInfo().setPos(v3).setNor(n).setCol(Color.WHITE);
         meshbuild.triangle(a, b, c);
     }
 

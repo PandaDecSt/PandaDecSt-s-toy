@@ -173,7 +173,6 @@ public class OcclusionCullingTest extends BaseBulletTest {
         sb.append("'4' to cycle occlusion buffer sizes\n");
         sb.append("'5' to toggle occlusion buffer image\n");
         sb.append("'6' to toggle shadows\n");
-        instructions = sb.toString();
 
         AssetManager assets = new AssetManager();
         disposables.add(assets);

@@ -73,9 +73,8 @@ public class BasicBulletTest extends BulletTest {
 	Array<btRigidBody> bodies = new Array<btRigidBody>();
 
 	@Override
-	public void show () {
+	public void show() {
 		super.show();
-		instructions = "Swipe for next test";
 
 		lights = new Environment();
 		lights.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.2f, 0.2f, 0.2f, 1.f));
@@ -111,7 +110,7 @@ public class BasicBulletTest extends BulletTest {
 			1,
 			0,
 			new Material(ColorAttribute.createDiffuse(Color.BLUE), ColorAttribute.createSpecular(Color.WHITE), FloatAttribute
-				.createShininess(16f)), Usage.Position | Usage.Normal);
+                         .createShininess(16f)), Usage.Position | Usage.Normal);
 		models.add(groundModel);
 		final Model sphereModel = modelBuilder.createSphere(
 			1f,
@@ -120,7 +119,7 @@ public class BasicBulletTest extends BulletTest {
 			10,
 			10,
 			new Material(ColorAttribute.createDiffuse(Color.RED), ColorAttribute.createSpecular(Color.WHITE), FloatAttribute
-				.createShininess(64f)), Usage.Position | Usage.Normal);
+                         .createShininess(64f)), Usage.Position | Usage.Normal);
 		models.add(sphereModel);
 		// Load the bullet library
 		BaseBulletTest.init(); // Normally use: Bullet.init();
@@ -171,7 +170,7 @@ public class BasicBulletTest extends BulletTest {
 	}
 
 	@Override
-	public void render (float d) {
+	public void render(float d) {
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
@@ -197,7 +196,7 @@ public class BasicBulletTest extends BulletTest {
 	}
 
 	@Override
-	public void dispose () {
+	public void dispose() {
 		collisionWorld.dispose();
 		solver.dispose();
 		broadphase.dispose();

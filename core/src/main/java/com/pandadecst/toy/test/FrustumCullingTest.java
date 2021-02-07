@@ -124,8 +124,6 @@ public class FrustumCullingTest extends BaseBulletTest {
     public void show() {
         super.show();
 
-        instructions = "Tap to toggle view\nLong press to toggle debug mode\nSwipe for next test\nCtrl+drag to rotate\nScroll to zoom";
-
         tempManifoldArr = new btPersistentManifoldArray();
 
         world.addConstructor("collisionBox", new BulletConstructor(world.getConstructor("box").model));

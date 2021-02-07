@@ -9,7 +9,6 @@ import com.pandadecst.toy.tool.FPSCameraController;
 public class BulletTest extends BaseInput implements Screen {
 
 	public StringBuilder performance = new StringBuilder();
-	public String instructions = "test";
 	public PerformanceCounter performanceCounter = new PerformanceCounter(this.getClass().getSimpleName());
 	public FloatCounter fpsCounter = new FloatCounter(5);
     public FPSCameraController cameraController;

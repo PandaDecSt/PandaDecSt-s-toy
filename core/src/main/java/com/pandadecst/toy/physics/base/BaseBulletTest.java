@@ -57,9 +57,8 @@ import com.pandadecst.toy.ui.UiCreator;
 import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 import com.pandadecst.toy.world.SkyBox;
-import com.pandadecst.toy.tool.p3dLoader;
-import com.badlogic.gdx.graphics.VertexAttribute;
-import com.badlogic.gdx.graphics.Mesh;
+import com.pandadecst.toy.world.terrain.TerrainBuilder;
+import com.pandadecst.toy.world.terrain.TerrainGenerator;
 import java.util.List;
 
 /** @author xoppa */
@@ -77,6 +76,14 @@ public class BaseBulletTest extends BulletTest {
 
     public ObjectController objController = new ObjectController();
 
+    public TerrainGenerator tg = null;
+    public TerrainBuilder tb;
+    int size = 1;
+    private float roughness = 0.05f;
+    private float waterLevel = 0.3f;
+    private int seed = (int) (Math.random() * Math.pow(2, 20));
+    private int tsize = 128;
+    
 	public static void init() {
 		if (initialized) return;
 		// Need to initialize bullet before using it.
@@ -164,36 +171,20 @@ public class BaseBulletTest extends BulletTest {
 		disposables.add(boxModel);
         List<Vector3> pos = MeshHelper.getPositions(boxModel.meshParts.get(0).mesh);
         float v[] = MeshHelper.getVertices(boxModel.meshParts.get(0).mesh);
-//        Gdx.app.log("meshhelper", v.length + "");
-//        for (int i = 0; i < v.length; i += 3) {
-//            Gdx.app.log("meshhelper", v[i] + "," + v[i + 1] + "," + v[i + 2]);
-//        }
-//        String str = "";
-//        for (int i = 0; i < v.length; i++) {
-//            str = str + v[i] + ",";
-//        }
-//        Gdx.app.log("meshhelper", str);
-//
         short s[] = MeshHelper.getIndices(boxModel.meshParts.get(0).mesh);
         MeshHelper.getPositions(boxModel.meshParts.get(0).mesh);
         MeshHelper.getTriangles(boxModel.meshParts.get(0).mesh);
         MeshHelper.getVertexAttributes(boxModel.meshParts.get(0).mesh);
-//        Gdx.app.log("meshhelper", s.length + "");
-//        for (int i = 0; i < s.length; i++) {
-//            Gdx.app.log("meshhelper", s[i] + "");
-//        }
-//        str = "";
-//        for (int i = 0; i < s.length; i++) {
-//            str = str + s[i] + ",";
-//        }
-//        Gdx.app.log("meshhelper", str);
-//
-//        Gdx.app.log("meshhelper", "over");
-//
-        Model test = //p3dLoader.loadmodel(Gdx.files.absolute("./storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
-            modelFactory.mesh2model(MeshHelper.buildCube(1/2),
-            //MeshHelper.createMesh(MeshHelper.getTriangles(boxModel.meshParts.get(0).mesh), boxModel.meshParts.get(0).mesh.getVertexAttributes()),
-            material);
+
+        tb = new TerrainBuilder();
+        tg = new TerrainGenerator(tsize, roughness, seed, waterLevel);
+        tg.generate();
+        
+        Model test = tb.build(tg);
+         //p3dLoader.loadmodel(Gdx.files.absolute("./storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
+//            modelFactory.mesh2model(MeshHelper.buildCube(1 / 2),
+//                                    //MeshHelper.createMesh(MeshHelper.getTriangles(boxModel.meshParts.get(0).mesh), boxModel.meshParts.get(0).mesh.getVertexAttributes()),
+//                                    material);
 
 
 		// Add the constructors
@@ -212,7 +203,7 @@ public class BaseBulletTest extends BulletTest {
         inputMultiplexer.addProcessor(cameraController);
         Gdx.input.setInputProcessor(inputMultiplexer);
 	}
-
+    
 	@Override
 	public void dispose() {
         inputMultiplexer.clear();
@@ -278,7 +269,7 @@ public class BaseBulletTest extends BulletTest {
 			shadowBatch.end();
 			((DirectionalShadowLight)light).end();
 		}
-        skybox.draw();
+        //skybox.draw();
 
 		modelBatch.begin(camera);
 		world.render(modelBatch, environment);

@@ -45,8 +45,6 @@ public class VehicleTest extends BaseBulletTest {
 	public void show() {
 		super.show();
 
-		instructions = "Tap to shoot\nArrow keys to drive\nR to reset\nLong press to toggle debug mode\nSwipe for next test";
-
 		final Model chassisModel = objLoader.loadModel(Gdx.files.absolute("./storage/emulated/0/AIDE/girl.obj"));
 		disposables.add(chassisModel);
 		chassisModel.materials.get(0).clear();
@@ -57,12 +55,13 @@ public class VehicleTest extends BaseBulletTest {
 		wheelModel.materials.get(0).set(ColorAttribute.createDiffuse(Color.BLACK), ColorAttribute.createSpecular(Color.WHITE),
                                         FloatAttribute.createShininess(128));
 		Texture checkboard = new Texture(Gdx.files.internal("et/SAND.png"));
-		final Model largeGroundModel = modelBuilder.createBox(
-			200f,
-			4f,
-			200f,
-			new Material(TextureAttribute.createDiffuse(checkboard), ColorAttribute.createSpecular(Color.WHITE), FloatAttribute
-                         .createShininess(16f)), Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+		final Model largeGroundModel = tb.build(tg);
+//        modelBuilder.createBox(
+//			200f,
+//			4f,
+//			200f,
+//			new Material(TextureAttribute.createDiffuse(checkboard), ColorAttribute.createSpecular(Color.WHITE), FloatAttribute
+//                         .createShininess(16f)), Usage.Position | Usage.Normal | Usage.TextureCoordinates);
 		largeGroundModel.manageDisposable(checkboard);
 		disposables.add(largeGroundModel);
 		world.addConstructor("largeground", new BulletConstructor(largeGroundModel, 0f));
@@ -79,7 +78,7 @@ public class VehicleTest extends BaseBulletTest {
 //                world.add("largeground", j, -1f, i);
 //            }
 //        }
-        world.add("largeground", 20, -1f, 20);
+        world.add("largeground", -20, -1f, -20);
 
 		chassis = world.add("chassis", 0, 3f, 0);
 		wheels[0] = world.add("wheel", 0, 0, 0);
