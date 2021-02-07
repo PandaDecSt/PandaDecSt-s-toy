@@ -177,6 +177,7 @@ public class BaseBulletTest extends BulletTest {
         short s[] = MeshHelper.getIndices(boxModel.meshParts.get(0).mesh);
         MeshHelper.getPositions(boxModel.meshParts.get(0).mesh);
         MeshHelper.getTriangles(boxModel.meshParts.get(0).mesh);
+        MeshHelper.getVertexAttributes(boxModel.meshParts.get(0).mesh);
 //        Gdx.app.log("meshhelper", s.length + "");
 //        for (int i = 0; i < s.length; i++) {
 //            Gdx.app.log("meshhelper", s[i] + "");
@@ -189,10 +190,10 @@ public class BaseBulletTest extends BulletTest {
 //
 //        Gdx.app.log("meshhelper", "over");
 //
-        Model test = boxModel;//p3dLoader.loadmodel(Gdx.files.absolute("./storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
-//            modelFactory.mesh2model(
-//            MeshHelper.createMesh(v, s, boxModel.meshParts.get(0).mesh.getVertexAttributes()),
-//            material, attributes);
+        Model test = //p3dLoader.loadmodel(Gdx.files.absolute("./storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
+            modelFactory.mesh2model(MeshHelper.buildCube(1/2),
+            //MeshHelper.createMesh(MeshHelper.getTriangles(boxModel.meshParts.get(0).mesh), boxModel.meshParts.get(0).mesh.getVertexAttributes()),
+            material);
 
 
 		// Add the constructors

@@ -32,13 +32,13 @@ public class ModelFactory {
 //        Model r = createModelbyVertexs(v, new Material(ColorAttribute.createDiffuse(Color.WHITE), ColorAttribute.createSpecular(Color.WHITE)), Usage.Position | Usage.Normal);
 //    }
     
-    public Model mesh2model(Mesh m1,Material m, long a) {
+    public Model mesh2model(Mesh m1,Material m) {
         begin();
         part("m2m", m1, m);
         return end();
     }
     
-    public Model meshes2model(Material m, long a, Mesh... ms) {
+    public Model meshes2model(Material m, Mesh... ms) {
         begin();
         for (Mesh m0: ms){
             part("m2m", m0, m);

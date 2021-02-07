@@ -30,7 +30,7 @@ public class p3dLoader {
             for (JsonValue mesh = meshes.child; mesh != null; mesh = mesh.next) {
                 float vertices[] = mesh.require("vertices").asFloatArray();
                 short indices[] = mesh.require("indices").asShortArray();
-                ml.add(MeshHelper.createMesh(vertices, indices));
+                ml.add(MeshHelper.createMesh(vertices, indices, attributes));
             }
             Mesh ms[] = new Mesh[ml.size()];
             for (int i = 0; i < ml.size(); i++) {
@@ -50,10 +50,10 @@ public class p3dLoader {
                 }
             } else {
                 material = new Material(ColorAttribute.createDiffuse(Color.WHITE), ColorAttribute.createSpecular(Color.WHITE), FloatAttribute
-                             .createShininess(16f));
+                                        .createShininess(16f));
             }
             if (material != null && ms != null) {
-                return ModelFactory.meshes2model(material, attributes, ms);
+                return ModelFactory.meshes2model(material, ms);
             } else {
                 return null;
             }
