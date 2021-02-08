@@ -68,6 +68,7 @@ public class BaseBulletTest extends BulletTest {
 
 	private static boolean initialized = false;
 
+    public static boolean openlight = true;
 	public static boolean shadows = true;
 
     public Stage uistage = new Stage(new ScreenViewport());
@@ -119,10 +120,12 @@ public class BaseBulletTest extends BulletTest {
 		init();
 
 		environment = new Environment();
+        if (openlight){
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.3f, 0.3f, 0.3f, 1.f));
 		light = shadows ? new DirectionalShadowLight(1928, 1080, 20f, 20f, 1f, 3000f) : new DirectionalLight();
-		light.set(0.8f, 0.8f, 0.8f, -0.5f, -1f, 0.7f);
+		light.set(0.8f, 0.8f, 0.8f, 0.5f, 0.8f, 0.2f);
 		environment.add(light);
+        }
 		if (shadows)
 			environment.shadowMap = (DirectionalShadowLight)light;
 		shadowBatch = new ModelBatch(new DepthShaderProvider());
@@ -144,7 +147,7 @@ public class BaseBulletTest extends BulletTest {
         cameraController = new FPSCameraController(camera);
 
 		// Create some simple models
-		final Model groundModel = modelBuilder.createRect(
+	    Model groundModel = modelBuilder.createRect(
 			20f,
 			0f,
 			-20f,
@@ -181,6 +184,7 @@ public class BaseBulletTest extends BulletTest {
         tg.generate();
         
         Model test = tb.build(tg);
+        groundModel = tb.build(tg);
          //p3dLoader.loadmodel(Gdx.files.absolute("./storage/emulated/0/a-CDDAmod编辑/slime.g3dj"));
 //            modelFactory.mesh2model(MeshHelper.buildCube(1 / 2),
 //                                    //MeshHelper.createMesh(MeshHelper.getTriangles(boxModel.meshParts.get(0).mesh), boxModel.meshParts.get(0).mesh.getVertexAttributes()),
@@ -191,7 +195,7 @@ public class BaseBulletTest extends BulletTest {
 		world.addConstructor("ground", new BulletConstructor(groundModel, 0f)); // mass = 0: static body
 		world.addConstructor("box", new BulletConstructor(boxModel, 1f)); // mass = 1kg: dynamic body
 		world.addConstructor("staticbox", new BulletConstructor(boxModel, 0f)); // mass = 0: static body
-        world.addConstructor("new", new BulletConstructor(test, 1f));
+        world.addConstructor("new", new BulletConstructor(boxModel, 1f));
 
         UiCreator.createVisUi(uistage, inputMultiplexer, this);
         UiCreator.createNewObj(uistage, objController);
@@ -202,6 +206,7 @@ public class BaseBulletTest extends BulletTest {
         inputMultiplexer.addProcessor(uistage);
         inputMultiplexer.addProcessor(cameraController);
         Gdx.input.setInputProcessor(inputMultiplexer);
+        toggleDebugMode();
 	}
     
 	@Override
