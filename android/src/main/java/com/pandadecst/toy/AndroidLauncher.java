@@ -11,9 +11,7 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//横屏
-		//AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		//initialize(new com.jiexdrop.lune.LuneGame(), config);
-        
+
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new 启动器(), config);
 	}

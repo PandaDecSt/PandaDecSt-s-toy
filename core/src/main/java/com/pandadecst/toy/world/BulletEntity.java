@@ -25,7 +25,6 @@ import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody;
 import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody.btRigidBodyConstructionInfo;
 import com.badlogic.gdx.physics.bullet.linearmath.btMotionState;
-import com.pandadecst.toy.physics.base.BaseEntity;
 
 /** @author xoppa Renderable BaseEntity with a bullet physics body. */
 public class BulletEntity extends BaseEntity {

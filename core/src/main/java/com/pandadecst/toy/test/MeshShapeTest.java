@@ -2,6 +2,7 @@ package com.pandadecst.toy.test;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
@@ -9,9 +10,8 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.btBvhTriangleMeshShape;
 import com.badlogic.gdx.physics.bullet.collision.btSphereShape;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
-import com.pandadecst.toy.tool.BulletConstructor;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
+import com.pandadecst.toy.world.BulletConstructor;
 
 /** @author xoppa */
 public class MeshShapeTest extends BaseBulletTest {

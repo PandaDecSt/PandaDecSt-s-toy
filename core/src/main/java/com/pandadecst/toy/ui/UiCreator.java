@@ -10,7 +10,7 @@ import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import com.pandadecst.toy.tool.Logger;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
 
 public class UiCreator {
 

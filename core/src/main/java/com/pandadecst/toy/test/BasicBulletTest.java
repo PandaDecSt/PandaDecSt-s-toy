@@ -48,8 +48,8 @@ import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody.btRigidBodyConstruct
 import com.badlogic.gdx.physics.bullet.dynamics.btSequentialImpulseConstraintSolver;
 import com.badlogic.gdx.physics.bullet.linearmath.btDefaultMotionState;
 import com.badlogic.gdx.utils.Array;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
-import com.pandadecst.toy.physics.base.BulletTest;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
+import com.pandadecst.toy.utils.base.BulletTest;
 
 /** @author xoppa */
 public class BasicBulletTest extends BulletTest {

@@ -26,7 +26,7 @@ import com.badlogic.gdx.physics.bullet.dynamics.btDynamicsWorld;
 import com.badlogic.gdx.physics.bullet.dynamics.btKinematicCharacterController;
 import com.badlogic.gdx.physics.bullet.dynamics.btSequentialImpulseConstraintSolver;
 import com.pandadecst.toy.*;
-import com.pandadecst.toy.physics.base.*;
+import com.pandadecst.toy.utils.base.*;
 import com.pandadecst.toy.world.*;
 import com.pandadecst.toy.tool.*;
 
@@ -70,14 +70,14 @@ public class CharacterTest extends BaseBulletTest {
 		(ground = world.add("ground", 0f, -5f, 0f))
 			.setColor(0.25f + 0.5f * (float)Math.random(), 0.25f + 0.5f * (float)Math.random(), 0.25f + 0.5f * (float)Math.random(), 1f);
 		// Create some boxes to play with
-		for (int x = 0; x < BOXCOUNT_X; x++) {
-			for (int y = 0; y < BOXCOUNT_Y; y++) {
-				for (int z = 0; z < BOXCOUNT_Z; z++) {
-					world.add("box", BOXOFFSET_X + x, BOXOFFSET_Y + y, BOXOFFSET_Z + z)
-						.setColor(0.5f + 0.5f * (float)Math.random(), 0.5f + 0.5f * (float)Math.random(), 0.5f + 0.5f * (float)Math.random(), 1f);
-				}
-			}
-		}
+//		for (int x = 0; x < BOXCOUNT_X; x++) {
+//			for (int y = 0; y < BOXCOUNT_Y; y++) {
+//				for (int z = 0; z < BOXCOUNT_Z; z++) {
+//					world.add("box", BOXOFFSET_X + x, BOXOFFSET_Y + y, BOXOFFSET_Z + z)
+//						.setColor(0.5f + 0.5f * (float)Math.random(), 0.5f + 0.5f * (float)Math.random(), 0.5f + 0.5f * (float)Math.random(), 1f);
+//				}
+//			}
+//		}
 	}
 
 	@Override

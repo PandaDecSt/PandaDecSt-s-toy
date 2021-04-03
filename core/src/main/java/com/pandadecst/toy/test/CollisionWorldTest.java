@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.bullet.collision.btDbvtBroadphase;
 import com.badlogic.gdx.physics.bullet.collision.btDefaultCollisionConfiguration;
 import com.badlogic.gdx.physics.bullet.dynamics.btDiscreteDynamicsWorld;
 import com.badlogic.gdx.physics.bullet.dynamics.btSequentialImpulseConstraintSolver;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
 import com.pandadecst.toy.world.BulletWorld;
 import com.badlogic.gdx.Gdx;
 import com.pandadecst.toy.world.BulletEntity;

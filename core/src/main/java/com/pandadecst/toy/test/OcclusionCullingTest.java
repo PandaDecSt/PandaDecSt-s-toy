@@ -31,10 +31,10 @@ import com.badlogic.gdx.physics.bullet.dynamics.btDiscreteDynamicsWorld;
 import com.badlogic.gdx.physics.bullet.dynamics.btSequentialImpulseConstraintSolver;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.StringBuilder;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
-import com.pandadecst.toy.physics.base.OcclusionBuffer;
-import com.pandadecst.toy.physics.base.OcclusionCuller;
-import com.pandadecst.toy.tool.BulletConstructor;
+import com.pandadecst.toy.utils.OcclusionBuffer;
+import com.pandadecst.toy.utils.OcclusionCuller;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
+import com.pandadecst.toy.world.BulletConstructor;
 import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 

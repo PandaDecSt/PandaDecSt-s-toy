@@ -4,11 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
-import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -21,11 +21,9 @@ import com.badlogic.gdx.physics.bullet.dynamics.btRaycastVehicle.btVehicleTuning
 import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody;
 import com.badlogic.gdx.physics.bullet.dynamics.btVehicleRaycaster;
 import com.badlogic.gdx.physics.bullet.dynamics.btWheelInfo;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
-import com.pandadecst.toy.tool.BulletConstructor;
-import com.pandadecst.toy.tool.Logger;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
+import com.pandadecst.toy.world.BulletConstructor;
 import com.pandadecst.toy.world.BulletEntity;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 
 /** @author Xoppa */
 public class VehicleTest extends BaseBulletTest {

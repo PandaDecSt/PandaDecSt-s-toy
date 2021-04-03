@@ -44,7 +44,7 @@ import com.badlogic.gdx.physics.bullet.softbody.btSoftBodyHelpers;
 import com.badlogic.gdx.physics.bullet.softbody.btSoftBodyRigidBodyCollisionConfiguration;
 import com.badlogic.gdx.physics.bullet.softbody.btSoftBodyWorldInfo;
 import com.badlogic.gdx.physics.bullet.softbody.btSoftRigidDynamicsWorld;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
 import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 

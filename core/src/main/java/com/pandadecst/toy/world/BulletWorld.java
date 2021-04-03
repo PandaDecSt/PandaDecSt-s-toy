@@ -41,7 +41,6 @@ import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody;
 import com.badlogic.gdx.physics.bullet.dynamics.btSequentialImpulseConstraintSolver;
 import com.badlogic.gdx.physics.bullet.linearmath.btIDebugDraw;
 import com.badlogic.gdx.utils.PerformanceCounter;
-import com.pandadecst.toy.physics.base.BaseWorld;
 
 /** @author xoppa Bullet physics world that holds all bullet entities and constructors. */
 public class BulletWorld extends BaseWorld<BulletEntity> {

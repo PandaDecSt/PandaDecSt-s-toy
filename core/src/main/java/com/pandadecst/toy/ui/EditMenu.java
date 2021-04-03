@@ -1,6 +1,7 @@
 package com.pandadecst.toy.ui;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -9,9 +10,8 @@ import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
 import com.pandadecst.toy.tool.ModelLoader;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
-import com.pandadecst.toy.tool.BulletConstructor;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
+import com.pandadecst.toy.world.BulletConstructor;
 
 public class EditMenu extends Menu {
 

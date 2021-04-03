@@ -24,8 +24,8 @@ import com.badlogic.gdx.physics.bullet.collision.btDefaultCollisionConfiguration
 import com.badlogic.gdx.physics.bullet.collision.btPairCachingGhostObject;
 import com.badlogic.gdx.physics.bullet.collision.btPersistentManifoldArray;
 import com.badlogic.gdx.utils.Array;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
-import com.pandadecst.toy.tool.BulletConstructor;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
+import com.pandadecst.toy.world.BulletConstructor;
 import com.pandadecst.toy.world.BulletEntity;
 import com.pandadecst.toy.world.BulletWorld;
 

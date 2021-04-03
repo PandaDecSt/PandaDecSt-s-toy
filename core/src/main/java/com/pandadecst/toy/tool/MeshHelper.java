@@ -393,6 +393,43 @@ public class MeshHelper {
         buildTriangle(v1, v2, v3, m);
         buildTriangle(v1, v2, v4, m);
     }
+    
+    public static Mesh createFullScreenQuad() {
+
+        float[] verts = new float[20];
+        int i = 0;
+
+        verts[i++] = -1; // x1
+        verts[i++] = -1; // y1
+        verts[i++] = 0;
+        verts[i++] = 0f; // u1
+        verts[i++] = 0f; // v1
+
+        verts[i++] = 1f; // x2
+        verts[i++] = -1; // y2
+        verts[i++] = 0;
+        verts[i++] = 1f; // u2
+        verts[i++] = 0f; // v2
+
+        verts[i++] = 1f; // x3
+        verts[i++] = 1f; // y2
+        verts[i++] = 0;
+        verts[i++] = 1f; // u3
+        verts[i++] = 1f; // v3
+
+        verts[i++] = -1; // x4
+        verts[i++] = 1f; // y4
+        verts[i++] = 0;
+        verts[i++] = 0f; // u4
+        verts[i++] = 1f; // v4
+
+        Mesh mesh = new Mesh( true, 4, 0,  // 具有四个顶点无indices的Mesh
+                             new VertexAttribute( Usage.Position, 3, ShaderProgram.POSITION_ATTRIBUTE ),
+                             new VertexAttribute( Usage.TextureCoordinates, 2, ShaderProgram.TEXCOORD_ATTRIBUTE+"0" ) );
+
+        mesh.setVertices( verts );
+        return mesh;
+    }
 
     public static Vector3 calculateNormal(Vector3 p1, Vector3 p2, Vector3 p3) {
 // u = p3 - p1

@@ -18,6 +18,7 @@ package com.pandadecst.toy.test;
 
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
@@ -37,9 +38,8 @@ import com.badlogic.gdx.physics.bullet.dynamics.btPoint2PointConstraint;
 import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody;
 import com.badlogic.gdx.physics.bullet.dynamics.btTypedConstraint;
 import com.badlogic.gdx.utils.Array;
-import com.pandadecst.toy.physics.base.BaseBulletTest;
-import com.pandadecst.toy.tool.BulletConstructor;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
+import com.pandadecst.toy.utils.base.BaseBulletTest;
+import com.pandadecst.toy.world.BulletConstructor;
 
 /** @author xoppa */
 public class RayPickRagdollTest extends BaseBulletTest {

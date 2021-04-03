@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Array;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
-import com.pandadecst.toy.tool.BulletConstructor;
 import com.pandadecst.toy.tool.G3DConverter;
 import java.io.IOException;
 
